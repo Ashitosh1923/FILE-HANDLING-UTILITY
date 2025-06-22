@@ -1,14 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
-public static FileHandler{
+public class FileHandler {
 
-    public static void writeFile(String filename, String content){
+    public static void writeFile(String filename, String content) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write(content);
-            System.out.println("File heve been written");
+            System.out.println("File has been written successfully.");
         } catch (IOException e) {
-            System.out.println(" Error writing to file: " + e.getMessage());
+            System.out.println("Error writing to file: " + e.getMessage());
         }
     }
 
@@ -27,7 +27,7 @@ public static FileHandler{
     public static void appendToFile(String filename, String content) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             writer.write(content);
-            System.out.println("appended id done .");
+            System.out.println("Content has been appended.");
         } catch (IOException e) {
             System.out.println("Error appending to file: " + e.getMessage());
         }
@@ -39,35 +39,34 @@ public static FileHandler{
             Scanner scanner = new Scanner(file);
             StringBuilder fileContent = new StringBuilder();
 
-            // Read the file content into a StringBuilder
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 fileContent.append(line.replace(oldContent, newContent)).append("\n");
             }
             scanner.close();
+
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write(fileContent.toString());
             writer.close();
 
-            System.out.println("🔄 File content modified.");
+            System.out.println("File content has been modified.");
         } catch (IOException e) {
             System.out.println("Error modifying file: " + e.getMessage());
         }
     }
 
-
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String filename = "example.txt";
 
-        System.out.println(" Welcome to Java File Handler");
+        System.out.println("=== Welcome to Java File Handler ===");
         System.out.println("1. Write to file");
         System.out.println("2. Read file");
         System.out.println("3. Append to file");
         System.out.println("4. Modify file");
         System.out.print("Enter your choice: ");
         int choice = input.nextInt();
-        input.nextLine();
+        input.nextLine();  
 
         switch (choice) {
             case 1:
@@ -91,7 +90,7 @@ public static FileHandler{
                 modifyFile(filename, find, replace);
                 break;
             default:
-                System.out.println("⚠️ Invalid choice.");
+                System.out.println("Invalid choice.");
         }
 
         input.close();
